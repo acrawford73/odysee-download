@@ -1,0 +1,13 @@
+bin/
+include/
+lib/
+share/
+downloads/
+encodes/
+*.ts
+*.qt
+*.mp4
+*.mov
+urls.txt
+notes.txt
+pyenv.cfg:
