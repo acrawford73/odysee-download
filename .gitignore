@@ -11,3 +11,4 @@ encodes/
 urls.txt
 notes.txt
 pyvenv.cfg:
+.DS_Store
