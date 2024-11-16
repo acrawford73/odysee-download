@@ -10,4 +10,4 @@ encodes/
 *.mov
 urls.txt
 notes.txt
-pyenv.cfg:
+pyvenv.cfg:
