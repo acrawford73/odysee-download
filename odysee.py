@@ -22,8 +22,8 @@ import requests
 
 
 download_dir = 'downloads'
-if not os.path.exists(dld_dir):
-	os.makedirs(dld_dir)
+if not os.path.exists(download_dir):
+	os.makedirs(download_dir)
 
 
 # get the list of URLs to grab
