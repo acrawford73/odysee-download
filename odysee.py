@@ -101,13 +101,13 @@ for url in dld_urls:
 		
 		filename = thumb.split('/')[-1]
 		new_fn = title + '.jpg'
-		with open(new_fn, 'wb') as f, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
+		with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 			for chunk in response.iter_content(chunk_size=chunk_size):
 				if chunk:
 					file.write(chunk)
 					bar.update(len(chunk))
 		shutil.move(new_fn, os.path.join(download_dir, new_fn))
-		f.close()
+		file.close()
 
 	except requests.exceptions.HTTPError as err:
 		print(f'HTTP Error: {err}')
@@ -134,14 +134,14 @@ for url in dld_urls:
 		file, ext = os.path.splitext(filename)
 		new_fn = title + ext
 		
-		with open(new_fn, 'wb') as f, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
+		with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 			for chunk in response.iter_content(chunk_size=chunk_size):
 				if chunk:
 					file.write(chunk)
 					bar.update(len(chunk))
 		
 		shutil.move(new_fn, os.path.join(download_dir, new_fn))
-		f.close()
+		file.close()
 
 	except requests.exceptions.HTTPError as err:
 		print(f'HTTP Error: {err}')
