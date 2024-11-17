@@ -6,7 +6,7 @@
 # Acquire uploads from Odysee
 # Prepare urls.txt file of Odysee links first
 # Gets the Title, Thumbnail URL, Video URL
-# Encodes:
+# Encode:
 #  Video: 720p, 29.97fps, q=26
 #  Audio: 44.1Khz, 128kbps, stereo
 
@@ -98,6 +98,7 @@ for url in dld_urls:
 					file.write(chunk)
 					bar.update(len(chunk))
 		shutil.move(new_fn, os.path.join(download_dir, new_fn))
+		f.close()
 
 	except requests.exceptions.HTTPError as err:
 		print(f'HTTP Error: {err}')
@@ -106,9 +107,8 @@ for url in dld_urls:
 	except requests.exceptions.Timeout as errt:
 		print(f'Timeout Error: {errt}')
 	except requests.exceptions.RequestException as errr:
-		print(f'OOps: Something Else: {errr}')				
+		print(f'Oops: Something Else: {errr}')				
 	finally:
-		f.close()
 		rs.close()
 
 	
@@ -132,6 +132,7 @@ for url in dld_urls:
 					bar.update(len(chunk))
 		
 		shutil.move(new_fn, os.path.join(download_dir, new_fn))
+		f.close()
 
 	except requests.exceptions.HTTPError as err:
 		print(f'HTTP Error: {err}')
@@ -140,16 +141,13 @@ for url in dld_urls:
 	except requests.exceptions.Timeout as errt:
 		print(f'Timeout Error: {errt}')
 	except requests.exceptions.RequestException as errr:
-		print(f'OOps: Something Else: {errr}')
-	finally:			
-		f.close()	
+		print(f'Oops: Something Else: {errr}')
+	finally:	
 		rs.close()
 
 	print()
 
 print()
-quit()
-
 
 
 ### Encode Video Files ###
@@ -170,29 +168,29 @@ video_files = [f for f in os.listdir(downloads_dir) if os.path.splitext(f)[1].lo
 
 # Transcode each video file using HandBrakeCLI
 for video_file in video_files:
-    input_file = os.path.join(downloads_dir, video_file)
-    output_file = os.path.join(output_dir, os.path.splitext(video_file)[0] + '.mp4')
-    
-    # HandBrakeCLI command for transcoding
-    command = [
-        'HandBrakeCLI',
-        '-i', input_file,
-        '-o', output_file,
-        '--preset', 'Very Fast 720p30',
-        '-e', 'x264',
-        '-q', '26',
-        '-r', '29.97',
-        '-R', '44.1',
-        '--ab', '128'
-    ]
-    
-    print(f"Transcoding {video_file}...")
+	input_file = os.path.join(downloads_dir, video_file)
+	output_file = os.path.join(output_dir, os.path.splitext(video_file)[0] + '.mp4')
 
-    try:
-        # Run the command
-        subprocess.run(command, check=True)
-        print(f"Transcoded {video_file} successfully.")
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to transcode {video_file}. Error: {e}")
+	# HandBrakeCLI command for transcoding
+	command = [
+		'HandBrakeCLI',
+		'-i', input_file,
+		'-o', output_file,
+		'--preset', 'Very Fast 720p30',
+		'-e', 'x264',
+		'-q', '26',
+		'-r', '29.97',
+		'-R', '44.1',
+		'--ab', '128'
+	]
+
+	print(f"Transcoding {video_file}...")
+
+	try:
+		# Run the command
+		subprocess.run(command, check=True)
+		print(f"Transcoded {video_file} successfully.")
+	except subprocess.CalledProcessError as e:
+		print(f"Failed to transcode {video_file}. Error: {e}")
 
 print()
