@@ -92,8 +92,7 @@ for url in dld_urls:
 		
 		filename = thumb.split('/')[-1]
 		new_fn = title + '.jpg'
-		with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, \
-				unit='B', unit_scale=True, unit_divisor=1024) as bar:
+		with open(new_fn, 'wb') as f, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 			for chunk in response.iter_content(chunk_size=chunk_size):
 				if chunk:
 					file.write(chunk)
@@ -109,7 +108,7 @@ for url in dld_urls:
 	except requests.exceptions.RequestException as errr:
 		print(f'OOps: Something Else: {errr}')				
 	finally:
-		file.close()
+		f.close()
 		rs.close()
 
 	
@@ -126,8 +125,7 @@ for url in dld_urls:
 		file, ext = os.path.splitext(filename)
 		new_fn = title + ext
 		
-		with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, \
-				unit='B', unit_scale=True, unit_divisor=1024) as bar:
+		with open(new_fn, 'wb') as f, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 			for chunk in response.iter_content(chunk_size=chunk_size):
 				if chunk:
 					file.write(chunk)
@@ -144,7 +142,7 @@ for url in dld_urls:
 	except requests.exceptions.RequestException as errr:
 		print(f'OOps: Something Else: {errr}')
 	finally:			
-		file.close()	
+		f.close()	
 		rs.close()
 
 	print()
@@ -154,7 +152,7 @@ quit()
 
 
 
-### Transcodes
+### Encode Video Files ###
 
 # Directory with video files
 output_dir = 'encodes'
