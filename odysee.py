@@ -3,7 +3,7 @@
 # Date: ~2024
 # Author: anonymoose
 
-# Acquire daily Psinergy uploads from Odysee
+# Acquire uploads from Odysee
 # Prepare urls.txt file of Odysee links first
 # Gets the Title, Thumbnail URL, Video URL
 # Encodes:
