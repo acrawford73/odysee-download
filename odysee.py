@@ -28,9 +28,9 @@ def clean_text(text):
     return cleaned
 
 
-download_dir = 'downloads'
-if not os.path.exists(download_dir):
-	os.makedirs(download_dir)
+downloads_dir = 'downloads'
+if not os.path.exists(downloads_dir):
+	os.makedirs(downloads_dir)
 
 
 # get the list of URLs to grab
@@ -106,7 +106,7 @@ for url in dld_urls:
 				if chunk:
 					file.write(chunk)
 					bar.update(len(chunk))
-		shutil.move(new_fn, os.path.join(download_dir, new_fn))
+		shutil.move(new_fn, os.path.join(downloads_dir, new_fn))
 		file.close()
 
 	except requests.exceptions.HTTPError as err:
@@ -140,7 +140,7 @@ for url in dld_urls:
 					file.write(chunk)
 					bar.update(len(chunk))
 		
-		shutil.move(new_fn, os.path.join(download_dir, new_fn))
+		shutil.move(new_fn, os.path.join(downloads_dir, new_fn))
 		file.close()
 
 	except requests.exceptions.HTTPError as err:
