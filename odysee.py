@@ -154,8 +154,6 @@ for url in dld_urls:
 	finally:	
 		rs.close()
 
-	print()
-
 print()
 
 
