@@ -13,6 +13,8 @@
 import os
 import sys
 import json
+import datetime,time
+from time import strftime
 import subprocess
 import shutil
 from bs4 import BeautifulSoup
@@ -120,6 +122,8 @@ for url in dld_urls:
 	finally:
 		rs.close()
 
+	created_utc = datetime.datetime.utcnow()
+	created = created_utc.strftime("%b %-d %Y").lower()
 	
 	# Video
 	try:
@@ -132,7 +136,7 @@ for url in dld_urls:
 
 		filename = video.split('/')[-1]
 		file, ext = os.path.splitext(filename)
-		new_fn = title + ext
+		new_fn = title + " " + created + ext
 		
 		with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 			for chunk in response.iter_content(chunk_size=chunk_size):
@@ -156,6 +160,7 @@ for url in dld_urls:
 
 print()
 
+quit()
 
 ### Encode Video Files ###
 
