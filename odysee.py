@@ -14,6 +14,7 @@ import os
 import sys
 import json
 import datetime,time
+from datetime import datetime
 from time import strftime
 import subprocess
 import shutil
@@ -86,11 +87,15 @@ for url in dld_urls:
 	title = title.strip()
 	thumb = json_content['thumbnailUrl']
 	video = json_content['contentUrl']
+	upload_date = json_content['uploadDate']
 
 	print()
 	print("Title: " + title)
 	print("Thumb: " + thumb)
 	print("Video: " + video)
+
+	uploaded = datetime.strptime(upload_date, '%Y-%m-%dT%H:%M:%S.%fZ')
+	created = uploaded.strftime("%b %-d %Y").lower()
 
 	# Thumb
 	try:
@@ -103,7 +108,7 @@ for url in dld_urls:
 		
 		filename = thumb.split('/')[-1]
 		new_fn = title + " " + created + '.jpg'
-		
+
 		with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 			for chunk in response.iter_content(chunk_size=chunk_size):
 				if chunk:
@@ -123,8 +128,6 @@ for url in dld_urls:
 	finally:
 		rs.close()
 
-	created_utc = datetime.datetime.utcnow()
-	created = created_utc.strftime("%b %-d %Y").lower()
 	
 	# Video
 	try:
