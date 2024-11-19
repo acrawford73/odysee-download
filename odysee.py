@@ -102,7 +102,8 @@ for url in dld_urls:
 		print(f'Downloading Thumbnail: {url}')
 		
 		filename = thumb.split('/')[-1]
-		new_fn = title + '.jpg'
+		new_fn = title + " " + created + '.jpg'
+		
 		with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 			for chunk in response.iter_content(chunk_size=chunk_size):
 				if chunk:
