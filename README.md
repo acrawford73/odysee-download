@@ -1,9 +1,13 @@
 # odysee-download
 Odysee post grabber.
 
-From a list of Odysee URLs, this script grabs the title, thumbnail, and video of an Odysee video post.
+From a list of Odysee URLs (urls.txt file), this script grabs the title, thumbnail, and video of an Odysee video post. It will then encode the video based on the preset configuration. 
 
-Encodes the video to preset configuration.
+Some Odysee accounts upload uncompressed video direct from their PC or mobile device. These files are really large so the encoding feature can reduce the file size on average by 75%. The encoding feature uses Handbrake to compress the video.
+
+The downloaded files are automatically renamed to the video title, with the published date added. 
+
+Special characters are removed from the filenames.
 
 ## Install
 
@@ -22,7 +26,7 @@ pip install bs4 requests tqdm
 
 ## URLs
 
-Add urls to file called: urls.txt
+Add one URL per line to file called: urls.txt
 
 ## Run
 
