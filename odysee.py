@@ -27,8 +27,8 @@ import re
 
 def clean_text(text):
     # Removes all special characters except spaces and alphanumeric characters
-    # Hyphens and Commas allowed
-    cleaned = re.sub(r'[^a-zA-Z0-9\s\,\-]', '', text)
+    # Hyphens, commas, periods allowed
+    cleaned = re.sub(r'[^a-zA-Z0-9\s\,\-\.]', '', text)
     return cleaned
 
 
