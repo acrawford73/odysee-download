@@ -38,8 +38,16 @@ Encoded video is placed in 'odysee-download/encodes'
 
 ## Encoding
 
-The encoding of video is enabled by default. If you wish to encode the downloaded videos, then uncomment line 167.
+The video encoding feature is enabled by default. If you wish to skip encoding the downloaded videos, then uncomment line 167.
+
+From:
 
 ```code
 # quit()
+```
+
+To:
+
+```code
+quit()
 ```
