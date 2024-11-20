@@ -10,5 +10,5 @@ encodes/
 *.mov
 urls.txt
 notes.txt
-pyvenv.cfg:
+pyvenv.cfg
 .DS_Store
