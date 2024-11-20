@@ -33,6 +33,7 @@ Add urls to file called: urls.txt
 ## Output
 
 Thumbnails and Videos are downloaded to 'odysee-download/downloads'
+
 Encoded video is placed in 'odysee-download/encodes'
 
 ## Encoding
