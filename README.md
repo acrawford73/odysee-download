@@ -58,7 +58,7 @@ The terminal output when encoding the videos is verbose so I won't show a sample
 
 ## Encoding
 
-The video encoding feature is enabled by default. If you wish to skip encoding the downloaded videos, then uncomment line 167.
+The video encoding feature is enabled by default. If you wish to skip encoding the downloaded videos, uncomment line 167.
 
 From:
 
