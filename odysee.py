@@ -1,7 +1,7 @@
 #!bin/python3
 
 # Date: ~2024
-# Author: anonymoose
+# Author: nanimoose
 
 # Acquire uploads from Odysee
 # Prepare urls.txt file of Odysee links first
@@ -25,10 +25,16 @@ import requests
 import re
 
 
+## Options
+get_links = True
+encode_video = False
+
+
 def clean_text(text):
     # Removes all special characters except spaces and alphanumeric characters
     # Hyphens, commas, periods allowed
-    cleaned = re.sub(r'[^a-zA-Z0-9\s\,\-\.]', '', text)
+    clean = re.sub(r'[^\~]', '-', text)
+    cleaned = re.sub(r'[^a-zA-Z0-9\s\,\-\.]', '', clean)
     return cleaned
 
 
@@ -70,7 +76,7 @@ for url in dld_urls:
 	if not content:
 		continue
 
-	# Parse webpage with bs4
+	# Parse webpage JSON metadata with bs4
 	soup = BeautifulSoup(content, 'html.parser')
 	script_tag = soup.find('script', {'type': 'application/ld+json'})
 	if script_tag:
@@ -95,10 +101,37 @@ for url in dld_urls:
 	print("Thumb: " + thumb)
 	print("Video: " + video)
 
+	# Grab date for filenames
 	uploaded = datetime.strptime(upload_date, '%Y-%m-%dT%H:%M:%S.%fZ')
-	created = uploaded.strftime("%b %-d %Y").lower()
+	created = uploaded.strftime("%b %-d %Y").lower()  # Format: nov 1 2024
 
-	# Thumb
+	# Get links from HTML
+	# if get_links:
+	# 	links = []
+	# 	created_links = uploaded.strftime("%B %-d %Y") # Format: November 1 2024
+		
+	# 	# Description
+	# 	desc_links = soup.find('script', {'type': 'application/ld+json'})
+	# 	for link in desc_links:
+	# 		links.append(link.strip())
+
+	# 	# Comments from Psinergy only
+	# 	comment_links = soup.find('script', {'type': 'application/ld+json'})
+	# 	for link in comment_links:
+	# 		links.append(link.strip())
+
+	# 	# Create text file for today's links
+	# 	links_filename = "Psinergy Links " + created_links + ".txt"
+	# 	with open(links_filename, 'a') as lf:
+	# 		lf.write('\n\n\n\n' + title + '\n\n')
+	# 		for link in links:
+	# 			lf.write(link+'\n')
+	# 	lf.close()
+
+	# quit()
+
+
+	# Get Thumb
 	try:
 		rs = requests.Session()
 		response = rs.get(thumb, timeout=20, allow_redirects=True)
@@ -130,7 +163,7 @@ for url in dld_urls:
 		rs.close()
 
 	
-	# Video
+	# Get Video
 	try:
 		rs = requests.Session()
 		response = rs.get(video, timeout=20, stream=True, allow_redirects=True)
@@ -165,10 +198,11 @@ for url in dld_urls:
 
 print()
 
-# quit()
 
 
 ### Encode Video Files ###
+if not encode_video:
+	quit()
 
 # Directory with video files
 output_dir = 'encodes'

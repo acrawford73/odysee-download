@@ -8,6 +8,7 @@ encodes/
 *.qt
 *.mp4
 *.mov
+*.html
 urls.txt
 notes.txt
 pyvenv.cfg
