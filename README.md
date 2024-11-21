@@ -14,7 +14,7 @@ Special characters are removed from the filenames, except commas, periods, and h
 This script is intended for Ubuntu Linux with Python 3.
 
 ```code
-sudo apt-get install python3 virtualenv python3-pip handbrake-cli
+sudo apt-get install python3 python3-pip virtualenv handbrake-cli
 ```
 
 ## PIP Installs
