@@ -5,9 +5,9 @@ From a list of Odysee video post URLs (placed in urls.txt file), this script gra
 
 Some Odysee accounts upload uncompressed video direct from their PC or mobile device. These files are really large so the encoding feature can reduce the file size on average by about 75%. The encoding feature uses HandBrake-CLI to compress the video.
 
-The downloaded files are automatically renamed to the video title, with the published date added. 
+The downloaded files are automatically renamed to the video title (metadata 'name' field) with the published date added. 
 
-Special characters are removed from the filenames.
+Special characters are removed from the filenames, except commas, periods, and hyphens.
 
 ## Install
 
