@@ -5,8 +5,8 @@
 
 # Acquire uploads from Odysee
 # Prepare urls.txt file of Odysee links first
-# Gets the Title, Thumbnail URL, Video URL
-# Encode:
+# Gets the Title, Thumbnail, Video, and Links
+# Encodes to MP4:
 #  Video: 720p, 29.97fps, q=26
 #  Audio: 44.1Khz, 128kbps, stereo
 
