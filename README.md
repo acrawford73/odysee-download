@@ -22,8 +22,8 @@ virtualenv -p /usr/bin/python3 odysee-download
 cd odysee-download
 source bin/activate
 pip install bs4 requests tqdm playwright
-playwright install
 playwright install-deps
+playwright install
 ```
 
 ## URLs
