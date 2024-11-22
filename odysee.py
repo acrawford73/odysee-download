@@ -32,7 +32,7 @@ links_file_init = False
 
 ## Options
 get_links = True
-download_files = False
+download_files = True
 encode_video = False
 
 
@@ -62,7 +62,7 @@ def fetch_html(url):
 # Remove all special characters except spaces and alphanumeric characters
 # Hyphens, commas, periods allowed
 def clean_text(text):
-	clean = re.sub(r'[^a-zA-Z0-9\s\,\-\.\~\&]', '', text)
+	clean = re.sub(r'[^a-zA-Z0-9\s\,\-\.\~\&\/]', '', text)
 	clean = clean.replace('~','-')
 	cleaned = clean.replace('/','-')
 	return cleaned.strip()
@@ -120,7 +120,7 @@ for url in dld_urls:
 	# Format: 'Psinergy Links Nov 1 2024.txt'
 	if not links_file_init:
 		created_links = uploaded.strftime("%B %-d %Y") # Format: November 1 2024
-		links_filename = "Psinergy Links " + created_links + ".txt"
+		links_filename = "Links " + created_links + ".txt"
 		print();print("Links file: " + links_filename)
 		with open(links_filename, 'w') as nf:
 			nf.write("Psinergy Links " + created_links + '\n\n')
@@ -134,7 +134,7 @@ for url in dld_urls:
 	print("Video: " + video)
 
 
-	# Get links from HTML
+	# Get links from HTML of each URL
 	if get_links:
 
 		# Initialize for this URL
@@ -260,7 +260,7 @@ for url in dld_urls:
 
 ### Encode Video Files ###
 if not encode_video:
-	quit()
+	print();quit()
 
 print()
 

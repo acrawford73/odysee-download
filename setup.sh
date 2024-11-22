@@ -1,9 +1,9 @@
 #!/bin/bash
 
 apt update
-apt install -y python3 handbrake-cli
+apt install -y python3 python3-pip virtualenv handbrake-cli
 
 source bin/activate
-pip install bs4
-pip install requests
-pip install tqdm
+pip install bs4 requests tqdm playwright
+playwright install
+playwright install-deps
