@@ -121,17 +121,6 @@ for url in dld_urls:
 	uploaded = datetime.strptime(upload_date, '%Y-%m-%dT%H:%M:%S.%fZ')
 	created = uploaded.strftime("%b %-d %Y").lower()  # Format: nov 1 2024
 
-	# Create new text file for today's links
-	# Format: 'Links Nov 1 2024.txt'
-	if not links_file_init:
-		created_links = uploaded.strftime("%B %-d %Y") # Format: November 1 2024
-		links_filename = "Links " + created_links + ".txt"
-		print();print("Links file: " + links_filename)
-		with open(links_filename, 'w') as nf:
-			nf.write("Links " + created_links + '\n\n')
-		nf.close()
-		links_file_init = True
-
 	# Show details for this URL
 	print()
 	print("Title: " + title_for_links)
@@ -146,14 +135,26 @@ for url in dld_urls:
 		links = []
 		
 		# Description
-		print();print("Description links:")
 		description_element = soup.find('div', class_='markdown-preview--description')
 		if not description_element:
 			print("Could not find the Description class.")
 		else:
 			desc_links = description_element.find_all('a')
-			print(len(desc_links))
-			if len(desc_links) > 0:
+			print();print("Description links: " + str(len(desc_links)))
+			
+			if len(desc_links) > 0:	
+			
+				# Create new text file for today's links
+				# Format: 'Links Nov 1 2024.txt'
+				if not links_file_init:
+					created_links = uploaded.strftime("%B %-d %Y") # Format: November 1 2024
+					links_filename = "Links " + created_links + ".txt"
+					print();print("Links file: " + links_filename)
+					with open(links_filename, 'w') as nf:
+						nf.write("Links " + created_links + '\n\n')
+					nf.close()
+					links_file_init = True
+
 				for link in desc_links:
 					link_http = link.get('href')
 					if link_http.startswith('http') or link_http.startswith('https'):
@@ -163,14 +164,26 @@ for url in dld_urls:
 				print("No links in description.")
 
 		# Comments
-		print();print("Comments links:")
 		comments_element = soup.find('ul', class_='comments')
 		if not comments_element:
 			print("Couldn't find any comments.")
 		else:
 			comment_links = comments_element.find_all('a')
-			print(len(comment_links))
+			print();print("Comment links: " + str(len(comment_links)))
+			
 			if len(comment_links) > 0:
+
+				# Create new text file for today's links
+				# Format: 'Links Nov 1 2024.txt'
+				if not links_file_init:
+					created_links = uploaded.strftime("%B %-d %Y") # Format: November 1 2024
+					links_filename = "Links " + created_links + ".txt"
+					print();print("Links file: " + links_filename)
+					with open(links_filename, 'w') as nf:
+						nf.write("Links " + created_links + '\n\n')
+					nf.close()
+					links_file_init = True
+
 				for link in comment_links:
 					link_http = link.get('href')
 					if link_http.startswith('http') or link_http.startswith('https'):
