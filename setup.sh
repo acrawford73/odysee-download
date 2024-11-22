@@ -5,5 +5,5 @@ apt install -y python3 python3-pip virtualenv handbrake-cli
 
 source bin/activate
 pip install bs4 requests tqdm playwright
-playwright install
 playwright install-deps
+playwright install
