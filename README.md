@@ -5,7 +5,7 @@ Purpose: To archive Odysee video content.
 
 From a list of Odysee video post URLs (placed in urls.txt file), this script grabs the title, thumbnail, and video of Odysee video posts. It will then encode the video based on a preset configuration. The script also grabs any links in the description and comments areas and saves them to a file.
 
-Some Odysee accounts upload uncompressed video direct from their PC or mobile device. These files are really large so the encoding feature can reduce the file size on average by about 75%. The encoding feature uses HandBrake-CLI to compress the video.
+Some Odysee accounts upload uncompressed video direct from their PC or mobile device. These files are really large so the encoding feature can reduce the file size on average by about 75%. The encoding feature uses HandBrake-CLI to encode all videos to MP4 format.
 
 The downloaded files are automatically renamed to the video title (metadata 'name' field) with the published date added. 
 
