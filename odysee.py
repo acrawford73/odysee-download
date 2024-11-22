@@ -32,7 +32,7 @@ links_file_init = False
 
 ## Options
 get_links = True
-download_files = True
+download_files = False
 encode_video = False
 
 
@@ -42,7 +42,7 @@ def fetch_html(url):
 		# Launch a browser
 		browser = p.firefox.launch(headless=True)  # Set headless=False if you want to see the browser
 		page = browser.new_page()
-		page.set_default_navigation_timeout(30000.0)
+		page.set_default_navigation_timeout(60000.0)
 		# Watch as the traffic flys by
 		page.on("request", lambda request: print(">>", request.method, request.url))
 		page.on("response", lambda response: print("<<", response.status, response.url))
@@ -89,6 +89,10 @@ for url in dld_urls:
 	content = fetch_html(url)
 	
 	## Testing
+	#with open('test.html', 'wb') as f:
+	#	f.write(content.encode())
+	#f.close()
+	#quit()
 	#content = open('test.html', 'r')
 
 	# If no content then try next URL
@@ -148,6 +152,7 @@ for url in dld_urls:
 			print("Could not find the Description class.")
 		else:
 			desc_links = description_element.find_all('a')
+			print(len(desc_links))
 			if len(desc_links) > 0:
 				for link in desc_links:
 					link_http = link.get('href')
@@ -164,6 +169,7 @@ for url in dld_urls:
 			print("Couldn't find any comments.")
 		else:
 			comment_links = comments_element.find_all('a')
+			print(len(comment_links))
 			if len(comment_links) > 0:
 				for link in comment_links:
 					link_http = link.get('href')
@@ -200,7 +206,7 @@ for url in dld_urls:
 			response.raise_for_status()
 			total_size = int(response.headers.get('content-length', 0))
 
-			print(f'Downloading Thumbnail: {url}')
+			print(f'Downloading Thumbnail: {thumb}')
 			
 			filename = thumb.split('/')[-1]
 			new_fn = title + " " + created + '.jpg'
@@ -232,7 +238,7 @@ for url in dld_urls:
 			response.raise_for_status()
 			total_size = int(response.headers.get('content-length', 0))
 			
-			print(f'Downloading Video: {url}')
+			print(f'Downloading Video: {video}')
 
 			filename = video.split('/')[-1]
 			file, ext = os.path.splitext(filename)
