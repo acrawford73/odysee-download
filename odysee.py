@@ -32,7 +32,7 @@ links_file_init = False
 
 ## Options
 get_links = True
-download_files = False
+download_files = True
 encode_video = False
 
 
