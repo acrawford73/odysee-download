@@ -154,9 +154,7 @@ for url in dld_urls:
 					print(link.get('href'))
 					links.append(link.get('href'))
 
-		# Comments from Psinergy only:
-		# Biofield Practice 0nly ~ Psinergy
-		# Psinergy0Nhold
+		# Comments
 		print();print("Comments links:")
 		comments_element = soup.find('ul', class_='comments')
 		if not comments_element:
