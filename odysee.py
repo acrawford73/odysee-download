@@ -148,11 +148,14 @@ for url in dld_urls:
 			print("Could not find the Description class.")
 		else:
 			desc_links = description_element.find_all('a')
-			for link in desc_links:
-				link_http = link.get('href')
-				if link_http.startswith('http') or link_http.startswith('https'):
-					print(link.get('href'))
-					links.append(link.get('href'))
+			if len(desc_links) > 0:
+				for link in desc_links:
+					link_http = link.get('href')
+					if link_http.startswith('http') or link_http.startswith('https'):
+						print(link.get('href'))
+						links.append(link.get('href'))
+			else:
+				print("No links in description.")
 
 		# Comments
 		print();print("Comments links:")
@@ -161,11 +164,14 @@ for url in dld_urls:
 			print("Couldn't find any comments.")
 		else:
 			comment_links = comments_element.find_all('a')
-			for link in comment_links:
-				link_http = link.get('href')
-				if link_http.startswith('http') or link_http.startswith('https'):
-					print(link.get('href'))
-					links.append(link.get('href'))
+			if len(comment_links) > 0:
+				for link in comment_links:
+					link_http = link.get('href')
+					if link_http.startswith('http') or link_http.startswith('https'):
+						print(link.get('href'))
+						links.append(link.get('href'))
+			else:
+				print("No links in comments.")
 
 		# Append the links to text file from this URL
 		if len(links) > 0:
