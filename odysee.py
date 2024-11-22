@@ -1,7 +1,7 @@
 #!bin/python3
 
 # Date: ~2024
-# Author: nanimoose
+# Author: github.com/acrawford73
 
 # Acquire uploads from Odysee
 # Prepare urls.txt file of Odysee links first
