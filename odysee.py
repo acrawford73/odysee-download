@@ -11,54 +11,47 @@
 #  Audio: 44.1Khz, 128kbps, stereo
 
 import os
+import re
 import sys
 import json
-import datetime,time
-from datetime import datetime
-from time import strftime
-import subprocess
 import shutil
-from bs4 import BeautifulSoup
+import subprocess
+import datetime,time
+from time import strftime
+from datetime import datetime
 from os.path import splitext
+# Third party
+from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright
 from tqdm import tqdm
 import requests
-import re
-from playwright.sync_api import sync_playwright
 
 print()
+links_file_init = False
 
 
 ## Options
 get_links = True
 download_files = False
 encode_video = False
-links_file_init = False
 
-
-def block_aggressively(route): 
-	if (route.request.resource_type != "document"): 
-		route.abort() 
-	else: 
-		route.continue_()
 
 # Get React HTML
 def fetch_html(url):
 	with sync_playwright() as p:
 		# Launch a browser
 		browser = p.firefox.launch(headless=True)  # Set headless=False if you want to see the browser
-
 		page = browser.new_page()
 		page.set_default_navigation_timeout(30000.0)
+		# Watch as the traffic flys by
 		page.on("request", lambda request: print(">>", request.method, request.url))
 		page.on("response", lambda response: print("<<", response.status, response.url))
+		# Filter out media content, not necessary for HTML parsing
 		page.route(re.compile(r"\.(qt|mov|mp4|jpg|png|svg|webp|wott)$"), lambda route: route.abort()) 
-
 		# Navigate to the desired URL
 		page.goto(url)
-
 		# Wait for the React app to load completely
 		page.wait_for_load_state('networkidle')
-
 		# Get the HTML content of the page
 		html_content = page.content()
 		# Close the browser
