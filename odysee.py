@@ -4,7 +4,7 @@
 # Author: github.com/acrawford73
 
 # Acquire uploads from Odysee
-# Prepare urls.txt file of Odysee links first
+# Prepare urls.txt file of Odysee URLs
 # Gets the Title, Thumbnail, Video, and Links
 # Encodes to MP4:
 #  Video: 720p, 29.97fps, q=26
