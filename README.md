@@ -23,7 +23,9 @@ sudo apt-get install python3 python3-pip virtualenv handbrake-cli
 virtualenv -p /usr/bin/python3 odysee-download
 cd odysee-download
 source bin/activate
-pip install bs4 requests tqdm
+pip install bs4 requests tqdm playwright
+playwright install
+playwright install-deps
 ```
 
 ## URLs
