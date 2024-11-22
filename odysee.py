@@ -118,13 +118,13 @@ for url in dld_urls:
 	created = uploaded.strftime("%b %-d %Y").lower()  # Format: nov 1 2024
 
 	# Create new text file for today's links
-	# Format: 'Psinergy Links Nov 1 2024.txt'
+	# Format: 'Links Nov 1 2024.txt'
 	if not links_file_init:
 		created_links = uploaded.strftime("%B %-d %Y") # Format: November 1 2024
 		links_filename = "Links " + created_links + ".txt"
 		print();print("Links file: " + links_filename)
 		with open(links_filename, 'w') as nf:
-			nf.write("Psinergy Links " + created_links + '\n\n')
+			nf.write("Links " + created_links + '\n\n')
 		nf.close()
 		links_file_init = True
 
