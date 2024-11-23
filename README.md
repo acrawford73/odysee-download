@@ -11,7 +11,7 @@ The downloaded thumbnail and video files are automatically renamed to the post t
 
 Special characters are removed from the filenames, except commas, periods, and hyphens.
 
-Playwright for Python is used for loading React based websites. [Playwright-Python](https://github.com/microsoft/playwright-python)
+Playwright for Python is used for loading Odysee pages, which are React based. [Playwright-Python](https://github.com/microsoft/playwright-python)
 
 ## Install
 
