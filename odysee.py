@@ -140,7 +140,6 @@ for url in dld_urls:
 			print("Could not find the Description class.")
 		else:
 			desc_links = description_element.find_all('a')
-			print();print("Description links: " + str(len(desc_links)))
 			
 			if len(desc_links) > 0:	
 			
@@ -155,6 +154,7 @@ for url in dld_urls:
 					nf.close()
 					links_file_init = True
 
+				print();print("Description links: " + str(len(desc_links)))
 				for link in desc_links:
 					link_http = link.get('href')
 					if link_http.startswith('http') or link_http.startswith('https'):
@@ -169,7 +169,6 @@ for url in dld_urls:
 			print("Couldn't find any comments.")
 		else:
 			comment_links = comments_element.find_all('a')
-			print();print("Comment links: " + str(len(comment_links)))
 			
 			if len(comment_links) > 0:
 
@@ -184,6 +183,7 @@ for url in dld_urls:
 					nf.close()
 					links_file_init = True
 
+				print();print("Comment links: " + str(len(comment_links)))
 				for link in comment_links:
 					link_http = link.get('href')
 					if link_http.startswith('http') or link_http.startswith('https'):
