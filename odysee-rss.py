@@ -25,7 +25,6 @@ import requests
 import feedparser
 
 
-
 # Remove all special characters except spaces and alphanumeric characters
 # Hyphens, commas, periods allowed
 def clean_title(text):
@@ -34,8 +33,6 @@ def clean_title(text):
 	clean = clean.replace('~','-')
 	cleaned = clean.replace('/','-')
 	return cleaned.strip()
-
-
 
 
 ### BEGIN HERE
@@ -47,7 +44,7 @@ if __name__ == "__main__":
 
 	## Options
 	save_links = True
-	download_files = False
+	download_files = True
 	encode_video = False
 
 
@@ -150,16 +147,17 @@ if __name__ == "__main__":
 
 						# GET THUMB
 						try:
+							thumb = "https://thumbnails.odycdn.com/card/s:1280:720/quality:85/plain/" + thumb
+							print(f'Downloading Thumbnail: {thumb}')
 							rs = requests.Session()
 							response = rs.get(thumb, timeout=20, allow_redirects=True)
 							response.raise_for_status()
 							total_size = int(response.headers.get('content-length', 0))
 
-							print(f'Downloading Thumbnail: {thumb}')
-							
-							filename = thumb.split('/')[-1]
-							new_fn = title + " " + created + '.jpg'
-
+							new_fn = title + " " + published_file + '.jpg'
+							#filename = thumb.split('/')[-1]
+							#file, ext = os.path.splitext(filename)
+							#new_fn = title + " " + published_file + ext
 							with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 								for chunk in response.iter_content(chunk_size=chunk_size):
 									if chunk:
@@ -182,17 +180,15 @@ if __name__ == "__main__":
 
 						# GET VIDEO
 						try:
+							print(f'Downloading Video: {video}')
 							rs = requests.Session()
 							response = rs.get(video, timeout=20, stream=True, allow_redirects=True)
 							response.raise_for_status()
 							total_size = int(response.headers.get('content-length', 0))
 							
-							print(f'Downloading Video: {video}')
-
 							filename = video.split('/')[-1]
 							file, ext = os.path.splitext(filename)
-							new_fn = title + " " + created + ext
-							
+							new_fn = title + " " + published_file + ext
 							with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 								for chunk in response.iter_content(chunk_size=chunk_size):
 									if chunk:
@@ -212,6 +208,7 @@ if __name__ == "__main__":
 							print(f'Oops: Something Else: {errr}')
 						finally:	
 							rs.close()
+
 
 					# CHECK ITEM LIMIT
 					if count == rss_item_count:
