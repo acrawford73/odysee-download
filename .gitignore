@@ -10,6 +10,8 @@ encodes/
 *.mov
 *.html
 urls.txt
+rss.xml
+rss.txt
 notes.txt
 pyvenv.cfg
 .DS_Store
