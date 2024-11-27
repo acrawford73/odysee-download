@@ -63,7 +63,7 @@ Encoded video is placed in 'odysee-download/encodes'
 
 ## Encoding
 
-The video encoding feature is disabled by default. If you wish to encode the downloaded videos, set the option "encode_video" to True.
+The video encoding feature is disabled by default. To enable, set the option "encode_video" to True.
 
 From:
 
