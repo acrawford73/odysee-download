@@ -137,7 +137,7 @@ for url in dld_urls:
 		# Description
 		description_element = soup.find('div', class_='markdown-preview--description')
 		if not description_element:
-			print("Could not find the Description class.")
+			print("Couldn't find description class.")
 		else:
 			desc_links = description_element.find_all('a')
 			
@@ -166,7 +166,7 @@ for url in dld_urls:
 		# Comments
 		comments_element = soup.find('ul', class_='comments')
 		if not comments_element:
-			print("Couldn't find any comments.")
+			print("Couldn't find comments class.")
 		else:
 			comment_links = comments_element.find_all('a')
 			
