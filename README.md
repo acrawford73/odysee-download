@@ -3,7 +3,7 @@ Odysee post grabber.
 
 Purpose: To archive Odysee video posts.
 
-From a list of Odysee video post URLs or RSS feed URL, this script grabs the title, thumbnail, and video of Odysee video posts. It will then encode the video based on a preset configuration. The script also grabs any links in the description and comments areas and saves them to a file. The RSS feed does not provide comment data.
+From a list of Odysee video post URLs or RSS feed URL, these scripts grab the title, thumbnail, and video of Odysee video posts. It will then encode the video based on a preset configuration. The script also grabs any links in the description and comments areas and saves them to a file. The RSS feed does not provide comment data.
 
 Some Odysee accounts upload uncompressed video direct from their PC or mobile device. These files can be really large so the encoding feature can reduce the file size on average by about 75%. HandBrake-CLI is used to encode all videos to MP4 format.
 
