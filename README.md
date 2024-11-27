@@ -47,7 +47,7 @@ Before using odysee.py, add one Odysee URL per line into file called: urls.txt
 ```
 Then enter the number of posts you wish to capture.
 
-- For capturing content from the RSS feed, enter this command:
+- For capturing content using the browser simulator, enter this command:
 
 ```code
 ./odysee.py
