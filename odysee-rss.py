@@ -45,7 +45,7 @@ if __name__ == "__main__":
 	## Options
 	save_links = True
 	download_files = True
-	encode_video = True
+	encode_video = False
 
 
 	# Get the list of Feed URLs to grab
@@ -123,7 +123,7 @@ if __name__ == "__main__":
 						# Create the new links file unless already created
 						if not links_file_init:
 							links_filename = "Links " + published_link + ".txt"
-							print();print("Links file: " + links_filename)
+							print();print("Created links file: " + links_filename)
 							with open(links_filename, 'w') as nf:
 								nf.write("Links " + published_link + '\n\n')
 							nf.close()
