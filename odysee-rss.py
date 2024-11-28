@@ -86,8 +86,6 @@ if __name__ == "__main__":
 				for item in rss_feed.entries:
 
 					#print("Processing RSS item # " + str(rss_item_count-1))
-					#item = rss_feed.entries
-
 					etype = item.enclosures[0].type
 
 					# process only video posts
@@ -156,9 +154,6 @@ if __name__ == "__main__":
 							total_size = int(response.headers.get('content-length', 0))
 
 							new_fn = title + " " + published_file + '.jpg'
-							#filename = thumb.split('/')[-1]
-							#file, ext = os.path.splitext(filename)
-							#new_fn = title + " " + published_file + ext
 							with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 								for chunk in response.iter_content(chunk_size=chunk_size):
 									if chunk:
