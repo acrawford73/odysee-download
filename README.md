@@ -45,7 +45,7 @@ Before using odysee.py, add one Odysee URL per line into file called: urls.txt
 ```code
 ./odysee-rss.py
 ```
-Then enter the number of posts you wish to capture.
+Then enter the number of consecutive recent posts you wish to capture.
 
 - For capturing content using the browser simulator, enter this command:
 

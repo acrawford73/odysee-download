@@ -92,6 +92,7 @@ if __name__ == "__main__":
 
 					# process only video posts
 					if etype.split('/')[0] != 'video':
+						count+=1
 						continue
 
 					# Thu, 21 Nov 2024 07:27:41 GMT
@@ -211,7 +212,7 @@ if __name__ == "__main__":
 
 
 					# CHECK ITEM LIMIT
-					if count == rss_item_count:
+					if count >= rss_item_count:
 						break
 					else:
 						count+=1
