@@ -62,7 +62,7 @@ def fetch_html(url):
 # Remove all special characters except spaces and alphanumeric characters
 # Hyphens, commas, periods allowed
 def clean_text(text):
-	text = text.replace('&quot;','')
+	text = text.replace('&quot;','_')
 	text = text.replace('&amp;','&')
 	clean = re.sub(r'[^a-zA-Z0-9\s\,\-\.\~\&\/]', '', text)
 	clean = clean.replace('~','-')

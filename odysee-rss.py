@@ -28,7 +28,7 @@ import feedparser
 # Remove all special characters except spaces and alphanumeric characters
 # Hyphens, commas, periods allowed
 def clean_title(text):
-	text = text.replace('&quot;','')
+	text = text.replace('&quot;','_')
 	text = text.replace('&amp;','&')
 	clean = re.sub(r'[^a-zA-Z0-9\s\,\-\.\~\&\/]', '', text)
 	clean = clean.replace('~','-')
@@ -46,7 +46,7 @@ if __name__ == "__main__":
 	## Options
 	save_links = True
 	download_files = True
-	encode_video = False
+	encode_video = True
 
 
 	# Get the list of Feed URLs to grab
