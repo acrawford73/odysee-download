@@ -46,7 +46,7 @@ if __name__ == "__main__":
 	## Options
 	save_links = True
 	download_files = True
-	encode_video = True
+	encode_video = False
 
 
 	# Get the list of Feed URLs to grab
@@ -138,6 +138,10 @@ if __name__ == "__main__":
 					## DOWNLOAD FILES
 					if download_files:
 
+						# Save list of video files for encoding later
+						if encode_video:
+							video_files = []
+
 						# Prep downloads folder
 						downloads_dir = 'downloads'
 						if not os.path.exists(downloads_dir):
@@ -160,8 +164,8 @@ if __name__ == "__main__":
 									if chunk:
 										file.write(chunk)
 										bar.update(len(chunk))
-							shutil.move(new_fn, os.path.join(downloads_dir, new_fn))
 							file.close()
+							shutil.move(new_fn, os.path.join(downloads_dir, new_fn))
 
 						except requests.exceptions.HTTPError as err:
 							print(f'HTTP Error: {err}')
@@ -192,8 +196,10 @@ if __name__ == "__main__":
 										file.write(chunk)
 										bar.update(len(chunk))
 							
-							shutil.move(new_fn, os.path.join(downloads_dir, new_fn))
 							file.close()
+							shutil.move(new_fn, os.path.join(downloads_dir, new_fn))
+							if encode_video:
+								video_files.append(new_fn)
 
 						except requests.exceptions.HTTPError as err:
 							print(f'HTTP Error: {err}')
@@ -219,6 +225,10 @@ if __name__ == "__main__":
 	if not encode_video:
 		quit()
 
+	if len(video_files) == 0:
+		print();print("There are no videos to encode.")
+		print();quit(1)
+
 	# Directory with video files
 	output_dir = 'encodes'
 
@@ -230,7 +240,7 @@ if __name__ == "__main__":
 	video_extensions = ['.qt', '.mov', '.mp4']
 
 	# Get list of video files
-	video_files = [f for f in os.listdir(downloads_dir) if os.path.splitext(f)[1].lower() in video_extensions]
+	#video_files = [f for f in os.listdir(downloads_dir) if os.path.splitext(f)[1].lower() in video_extensions]
 
 	# Transcode each video file using HandBrakeCLI
 	for video_file in video_files:
