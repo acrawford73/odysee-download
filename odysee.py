@@ -80,6 +80,11 @@ with open('urls.txt' ,'r') as dld:
 dld.close()
 
 
+# Prep video files list, for encoding later
+if encode_video:
+	video_files = []
+
+
 # Get metadata from urls
 for url in dld_urls:
 

@@ -81,6 +81,10 @@ if __name__ == "__main__":
 				rss_item_count = int(input())
 				print("Processing " + str(rss_item_count) + " RSS items...");print()
 
+				# Prep video files list, for encoding later
+				if encode_video:
+					video_files = []
+
 				# Only get the most recent items
 				#while rss_item_count >= 0:
 				count = 1
@@ -137,10 +141,6 @@ if __name__ == "__main__":
 
 					## DOWNLOAD FILES
 					if download_files:
-
-						# Save list of video files for encoding later
-						if encode_video:
-							video_files = []
 
 						# Prep downloads folder
 						downloads_dir = 'downloads'
