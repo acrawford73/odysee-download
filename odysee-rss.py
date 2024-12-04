@@ -3,7 +3,7 @@
 # Date: ~2024
 # Author: github.com/acrawford73
 
-# Acquire uploads from Odysee RSS feed
+# Acquire video posts from Odysee RSS feed
 # Gets the Title, Description, Thumbnail, Video
 # Encodes to MP4:
 #  Video: 720p, 29.97fps, q=26
