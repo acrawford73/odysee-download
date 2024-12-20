@@ -46,7 +46,7 @@ if __name__ == "__main__":
 	## Options
 	save_links = True
 	download_files = True
-	encode_video = False
+	encode_video = True
 
 
 	# Get the list of Feed URLs to grab

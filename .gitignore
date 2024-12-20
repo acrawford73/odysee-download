@@ -9,7 +9,8 @@ encodes/
 *.mp4
 *.mov
 *.html
-*.txt
+rss.txt
+urls.txt
 *.xml
 notes.txt
 pyvenv.cfg
