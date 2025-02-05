@@ -16,6 +16,7 @@ import json
 import shutil
 import subprocess
 import datetime,time
+from urllib.parse import urlparse
 from time import strftime
 from datetime import datetime
 from os.path import splitext
@@ -153,8 +154,22 @@ if __name__ == "__main__":
 						try:
 							thumb = "https://thumbnails.odycdn.com/card/s:1280:720/quality:85/plain/" + thumb
 							print(f'Downloading Thumbnail: {thumb}')
+							host_url = thumb
+							domain = urlparse(host_url).netloc
+
+							headers = {
+								'Host': domain,
+								'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+								'Accept-Language': 'en-US;q=0.7,en;q=0.3',
+								'Accept-Encoding': 'gzip, deflate, br, zstd',
+								'User-Agent':'Mozilla/5.0 (X11; Linux x86_64; rv:134.0) Gecko/20100101 Firefox/134.0',
+								'Connection':'keep-alive',
+								'Cache-Control': 'max-age=0',
+								'Upgrade-Insecure-Requests': '1',
+							}
+
 							rs = requests.Session()
-							response = rs.get(thumb, timeout=20, allow_redirects=True)
+							response = rs.get(thumb, timeout=20, allow_redirects=True, headers=headers)
 							response.raise_for_status()
 							total_size = int(response.headers.get('content-length', 0))
 
@@ -180,8 +195,24 @@ if __name__ == "__main__":
 
 
 						# GET VIDEO
+
+
 						try:
 							print(f'Downloading Video: {video}')
+							host_url = video
+							domain = urlparse(host_url).netloc
+
+							headers = {
+								'Host': domain,
+								'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+								'Accept-Language': 'en-US;q=0.7,en;q=0.3',
+								'Accept-Encoding': 'gzip, deflate, br, zstd',
+								'User-Agent':'Mozilla/5.0 (X11; Linux x86_64; rv:134.0) Gecko/20100101 Firefox/134.0',
+								'Connection':'keep-alive',
+								'Cache-Control': 'max-age=0',
+								'Upgrade-Insecure-Requests': '1',
+							}
+
 							rs = requests.Session()
 							response = rs.get(video, timeout=20, stream=True, allow_redirects=True)
 							response.raise_for_status()
@@ -218,6 +249,7 @@ if __name__ == "__main__":
 						break
 					else:
 						count+=1
+						time.sleep(5)
 
 	
 	## ENCODE VIDEOS
