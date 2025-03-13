@@ -1,7 +1,7 @@
 #!bin/python3
 
-# Date: ~2024
-# Author: github.com/acrawford73
+# Date: November 2024
+# Author: that anthony guy
 
 # Acquire video posts from Odysee RSS feed
 # Gets the Title, Description, Thumbnail, Video
@@ -47,7 +47,7 @@ if __name__ == "__main__":
 	## Options
 	save_links = True
 	download_files = True
-	encode_video = True
+	encode_video = False
 
 
 	# Get the list of Feed URLs to grab

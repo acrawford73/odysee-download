@@ -13,6 +13,6 @@ if test -d "encodes"; then
 else
 	echo "Encodes folder not found."
 fi
-rm Links*
+rm Links*.txt
 
 echo ""
