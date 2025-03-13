@@ -1,4 +1,8 @@
-#!bin/python3
+#!/usr/bin/python3
+# For a non-virtualenv
+
+# bin/python3
+# For a virtualenv
 
 # Date: November 2024
 # Author: that anthony guy
@@ -64,7 +68,7 @@ if __name__ == "__main__":
 	for url in feed_urls:
 		print();print(f'Requesting RSS... {url}');print()
 		
-		# Get Odysee RSS Feed
+		# Get Odysee RSS Feed Data
 		rss_feed = feedparser.parse(url)
 		
 		if rss_feed.bozo:
@@ -87,7 +91,6 @@ if __name__ == "__main__":
 					video_files = []
 
 				# Only get the most recent items
-				#while rss_item_count >= 0:
 				count = 1
 				for item in rss_feed.entries:
 
@@ -123,6 +126,7 @@ if __name__ == "__main__":
 
 
 					## LINKS
+
 					if save_links:
 						# Create the new links file unless already created
 						if not links_file_init:
@@ -141,6 +145,7 @@ if __name__ == "__main__":
 
 
 					## DOWNLOAD FILES
+
 					if download_files:
 
 						# Prep downloads folder
@@ -150,7 +155,9 @@ if __name__ == "__main__":
 
 						chunk_size = 1024
 
+
 						# GET THUMB
+
 						try:
 							thumb = "https://thumbnails.odycdn.com/card/s:1280:720/quality:85/plain/" + thumb
 							print(f'Downloading Thumbnail: {thumb}')
@@ -195,7 +202,6 @@ if __name__ == "__main__":
 
 
 						# GET VIDEO
-
 
 						try:
 							print(f'Downloading Video: {video}')
@@ -253,6 +259,7 @@ if __name__ == "__main__":
 
 	
 	## ENCODE VIDEOS
+
 	print()
 	if not encode_video:
 		quit()
