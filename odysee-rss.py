@@ -1,7 +1,4 @@
-#!/usr/bin/python3
-# For a non-virtualenv
-
-# bin/python3
+#!bin/python3
 # For a virtualenv
 
 # Date: November 2024
@@ -25,6 +22,7 @@ from time import strftime
 from datetime import datetime
 from os.path import splitext
 # Third party
+from PIL import Image, UnidentifiedImageError
 from tqdm import tqdm
 import requests
 import feedparser
@@ -39,6 +37,39 @@ def clean_title(text):
 	clean = clean.replace('~','-')
 	cleaned = clean.replace('/','-')
 	return cleaned.strip()
+
+
+SUPPORTED_IMAGE_EXTS = ('.jpg', '.jpeg', '.png', '.webp', '.bmp', '.tiff', '.heic', '.avif')
+
+def is_true_jpeg(image_path):
+	"""Return True if the file is a valid JPEG image."""
+	try:
+		with Image.open(image_path) as img:
+			img.verify()  # Check for file integrity
+			return True  # img.format == 'JPEG'
+	except (UnidentifiedImageError, OSError):
+		return False
+
+
+def convert_to_true_jpeg(image_path):
+	"""Convert any non-JPEG image (e.g., WebP, PNG) to a real JPEG."""
+	try:
+		with Image.open(image_path) as img:
+			if img.mode in ("RGBA", "LA") or (img.mode == "P" and "transparency" in img.info):
+				# Handle transparency by pasting over white background
+				background = Image.new("RGB", img.size, (255, 255, 255))
+				alpha = img.convert("RGBA")
+				background.paste(alpha, mask=alpha.split()[-1])
+				rgb_img = background
+			else:
+				rgb_img = img.convert('RGB')  # Ensure JPEG-compatible color mode
+
+			temp_path = image_path + ".tmp"
+			rgb_img.save(temp_path, 'JPEG', quality=95)
+			os.replace(temp_path, image_path)
+			print(f"[FIXED] Converted to true JPEG: {image_path}")
+	except Exception as e:
+		print(f"[ERROR] Failed to convert {image_path}: {e}")
 
 
 ### BEGIN HERE
@@ -181,13 +212,21 @@ if __name__ == "__main__":
 							total_size = int(response.headers.get('content-length', 0))
 
 							new_fn = title + " " + published_file + '.jpg'
+
 							with open(new_fn, 'wb') as file, tqdm(desc='Progress', total=total_size, unit='B', unit_scale=True, unit_divisor=1024) as bar:
 								for chunk in response.iter_content(chunk_size=chunk_size):
 									if chunk:
 										file.write(chunk)
 										bar.update(len(chunk))
 							file.close()
-							shutil.move(new_fn, os.path.join(downloads_dir, new_fn))
+							image_path = os.path.join(downloads_dir, new_fn)
+							shutil.move(new_fn, image_path)
+
+							# Convert WEBP to JPG
+							if not is_true_jpeg(image_path):
+								print(f"[INVALID] {image_path} - fixing...")
+								convert_to_true_jpeg(image_path)
+
 
 						except requests.exceptions.HTTPError as err:
 							print(f'HTTP Error: {err}')
